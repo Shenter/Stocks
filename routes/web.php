@@ -23,5 +23,6 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->get('/stocks', 'App\Http\Controllers\UserStocksController@index' )->name('stocks');
 
 Route::middleware('auth')->get('/stock/{stock}', 'App\Http\Controllers\StockController@show' )->name('stock.show');
+Route::middleware('auth')->get('/market', 'App\Http\Controllers\MarketController@show' )->name('market.show');
 
 require __DIR__.'/auth.php';
