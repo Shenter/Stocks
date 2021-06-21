@@ -11,7 +11,7 @@ class Stock extends Model
     use HasFactory;
     protected $table = 'stocks';
 
-
+    protected $hidden = ['volatility'];
 
 
 }

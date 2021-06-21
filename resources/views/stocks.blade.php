@@ -23,7 +23,7 @@
                         </thead>
                         <tbody>
 
-{{--{{ dd($catalog)}}--}}
+
                    @forelse($catalog as $stock)
 
                        <tr>

@@ -26,3 +26,4 @@ Route::middleware('auth')->get('/stock/{stock}', 'App\Http\Controllers\StockCont
 Route::middleware('auth')->get('/market', 'App\Http\Controllers\MarketController@show' )->name('market.show');
 
 require __DIR__.'/auth.php';
+Route::get('/mln', 'App\Http\Controllers\TestController@mln');
