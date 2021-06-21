@@ -24,6 +24,12 @@ Route::middleware('auth')->get('/stocks', 'App\Http\Controllers\UserStocksContro
 
 Route::middleware('auth')->get('/stock/{stock}', 'App\Http\Controllers\StockController@show' )->name('stock.show');
 Route::middleware('auth')->get('/market', 'App\Http\Controllers\MarketController@show' )->name('market.show');
+Route::middleware('auth')->get('/stock/{stock}/buy', 'App\Http\Controllers\StockController@buy' )->name('stock.buy');
+Route::middleware('auth')->post('/stock/{stock}/buy', 'App\Http\Controllers\StockController@confirmBuy' )->name('stock.buy.confirm');
+Route::middleware('auth')->get('/stock/{stock}/sell', 'App\Http\Controllers\StockController@sell' )->name('stock.sell');
+Route::middleware('auth')->post('/stock/{stock}/sell', 'App\Http\Controllers\StockController@confirmSell' )->name('stock.sell.confirm');
+
+
 
 require __DIR__.'/auth.php';
 Route::get('/mln', 'App\Http\Controllers\TestController@mln');

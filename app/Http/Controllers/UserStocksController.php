@@ -21,7 +21,6 @@ public function index()
         $catalog = array();
          foreach ($stocks as $key=>$val)
             {
-
             $catalog[$key]['currentPrice'] =  StockHistory::where(['stock_id'=>$key])->latest()->first()->sum;
                 $catalog[$key]['avgBuyPrice'] = $this->getAvgBuyprice($key);
              $catalog[$key]['count'] = $this->getCount($key);
@@ -29,15 +28,8 @@ public function index()
              $catalog[$key]['id'] = $key;
 
                 $catalog[$key]['change'] = round(( $catalog[$key]['currentPrice']*100/$catalog[$key]['avgBuyPrice'])-100,2);
-//                if($delta>0) {
-//                    $catalog[$key]['change'] = '+' . $delta;
-//                }
-//                else
-//                {
-//                    $catalog[$key]['change'] = '+' . $delta;
-//                }
+                $catalog[$key]['userHasMoneyToBuyStock'] = $this->userHasMoneyToBuyStock($key);
             }
-
 
 
         return view('stocks',['user'=>$user,'catalog'=>$catalog]);
@@ -59,4 +51,17 @@ public function index()
     {
         return count(DB::table('stock_user')->where(['user_id'=>Auth::id(),'stock_id'=>$stockId,'is_active'=>1])->get());
     }
+    public function userHasStock($stockId):bool
+    {
+        return DB::table('stock_user')->where(['user_id'=>Auth::id(),'stock_id'=>$stockId,'is_active'=>1])->exists();
+    }
+    public function userHasMoneyToBuyStock($stockId):bool
+    {
+        $stock = Stock::find($stockId);
+        return Auth::user()->money
+            >= $stock->getLatestPrice();
+    }
+
+
+
 }

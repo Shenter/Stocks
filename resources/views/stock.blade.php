@@ -6,6 +6,7 @@
     </x-slot>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </script>
+
     <div class="py-12">
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
