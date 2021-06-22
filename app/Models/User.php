@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Stock;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Stock;
 use App\Models\StockUser;
+use Illuminate\Support\Facades\DB;
 
 
 class User extends Authenticatable
@@ -75,6 +76,8 @@ class User extends Authenticatable
     public function buyStocks($stock, $count, $price)
     {
         $cost = round($price*$count* (1+ Stock::$TAX/100) ,2);
+        $adminMoney = DB::table('admin_money')->first()->sum + $price*$count* (Stock::$TAX/100);
+        DB::table('admin_money')->update(['sum'=>$adminMoney]);
      //   $user = Auth::user();
        $this->money -= $cost;
        $this->save();
@@ -92,11 +95,12 @@ class User extends Authenticatable
 
     public function sellStocks($stock, $count, $price)
     {
-        $cost =  round($count*$price*  (1- Stock::$TAX/100) );
+        $cost =  round($count*$price*  (1 - Stock::$TAX/100) );
+        $adminMoney = DB::table('admin_money')->first()->sum + $price*$count* (Stock::$TAX/100);
+        DB::table('admin_money')->update(['sum'=>$adminMoney]);
         $this->money += $cost;
         $this->save();
         StockUser::where(['is_active'=>1, 'user_id'=>$this->id,'stock_id'=>$stock->id])->take($count)->update(['is_active'=>false]);
-
     }
 
 }

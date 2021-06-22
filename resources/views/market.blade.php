@@ -31,8 +31,8 @@
                                @if($stock['stocksChangebyDay'] <0)
                                    <font color="red">{{$stock['stocksChangebyDay']}}</font>
                                @else {{$stock['stocksChangebyDay']}}
-                                   @endif
-                                   @endif
+                               @endif
+                           @endif
 
                            </td>
                            <td>

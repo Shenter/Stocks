@@ -21,7 +21,7 @@
 
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                    <table width="60%">
+                    <table width="100%">
                         <thead>
                         <tr>
                             <td>Наименование</td>
