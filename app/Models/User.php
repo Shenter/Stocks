@@ -53,7 +53,7 @@ class User extends Authenticatable
 
     public function stocks()
     {
-        return $this->belongsToMany(Stock::class,)->wherePivot('is_active',1)->withPivot('buy_price');
+        return $this->belongsToMany(Stock::class)->wherePivot('is_active',1)->withPivot('buy_price');
     }
 //    public function userHasStocks($stockId)
 //    {
@@ -63,7 +63,7 @@ class User extends Authenticatable
     public function howManystockscanBuy($stockId)
     {
         $stock = Stock::find($stockId);
-        return floor($this->money/$stock->getLatestPrice() *0.99 );
+        return floor($this->money/$stock->getLatestPrice() * 0.99 );
     }
     public function howManystockscanSell($stockId)
     {

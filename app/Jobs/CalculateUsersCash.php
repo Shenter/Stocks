@@ -33,7 +33,6 @@ class CalculateUsersCash implements ShouldQueue
      */
     public function handle()
     {
-        //
         $users = User::all();
         foreach ($users as $user) {
             $money=0;
@@ -47,9 +46,7 @@ class CalculateUsersCash implements ShouldQueue
                 'updated_at'=>date('Y-m-d H:i:s', time()),
                 'user_id' => $user->id,
                 'sum' => $money,
-
             ]);
         }
-
     }
 }

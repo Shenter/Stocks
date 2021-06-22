@@ -1,3 +1,4 @@
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -5,7 +6,6 @@
         </h2>
     </x-slot>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</script>
 
     <div class="py-12">
 
@@ -19,34 +19,35 @@
             </div>
         </div>
     </div>
+    <script>
+        const labels = [
+            @foreach   ($dates as $date)
+                "{{ $date->created_at}}",
+            @endforeach
+
+
+        ];
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: '',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: {{$values}},
+
+            }]
+        };
+        const config = {
+            type: 'line',
+            data,
+            options: {}
+        };
+
+        var myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
 </x-app-layout>
 
-<script>
-const labels = [
-  @foreach   ($dates as $date)
-"{{ $date->updated_at}}",
-  @endforeach
 
-
-];
-const data = {
-  labels: labels,
-  datasets: [{
-    label: '',
-    backgroundColor: 'rgb(255, 99, 132)',
-    borderColor: 'rgb(255, 99, 132)',
-    data: {{$values}},
-
-  }]
-};
-const config = {
-  type: 'line',
-  data,
-  options: {}
-};
-
-  var myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
-</script>
