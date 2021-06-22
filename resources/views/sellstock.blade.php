@@ -25,11 +25,11 @@
                       <form method="POST" action={{route('stock.sell.confirm',['stock'=>$stock->id])}} class="w-full ">
                           @csrf
                       </div>
-                    У вас в наличии - {{$howManystockscanSell}}
+                    У вас в наличии - {{$howManyStocksCanSell}}
                       <br>
                       Цена 1 - {{$stock->getLatestPrice()/100}}
                       <br>
-                      Комиссия за продажу - {{$stock::$TAX}}%
+                      Комиссия за продажу - {{$stock::$TAX}}% ({{$stock::$TAX*$stock->getLatestPrice()/10000}} за 1 шт.)
                       <br>
                     <div class="flex flex-wrap -mx-3 mb-2">
                         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -38,7 +38,7 @@
                             </label>
                             <div class="mt-1 relative rounded-md shadow-sm">
 
-                                <input type="number"  id="count" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pr-12 sm:text-sm border-gray-300 rounded-md"  max="{{$howManystockscanSell}}" min="1" step="1" placeholder="1" value="1" name="count">
+                                <input type="number"  id="count" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pr-12 sm:text-sm border-gray-300 rounded-md"  max="{{$howManyStocksCanSell}}" min="1" step="1" placeholder="1" value="1" name="count">
 
                             </div>
 

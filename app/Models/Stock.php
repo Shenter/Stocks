@@ -8,7 +8,7 @@ use App\Models\StockHistory;
 
 /**
  * Class Stock
- * @mixin \Illuminate\Database\Eloquent\
+ * @mixin \Eloquent
  */
 class Stock extends Model
 {

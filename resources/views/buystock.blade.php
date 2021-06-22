@@ -45,19 +45,19 @@
                             </label>
                             <div class="mt-1 relative rounded-md shadow-sm">
 
-                                <input  id="count" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full  pr-12 sm:text-sm border-gray-300 rounded-md"  type="number" max="{{$howManystockscanBuy}}" min="1" step="1" placeholder="1" value="1" name="count">
+                                <input  id="count" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full  pr-12 sm:text-sm border-gray-300 rounded-md"  type="number" max="{{$howManyStocksCanBuy}}" min="1" step="1" placeholder="1" value="1" name="count">
 
                             </div>
 
 
                             <div class="relative">
 
-{{--                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="number" max="{{$howManystockscanBuy}}" min="1" step="1" placeholder="1" value="1" name="count">--}}
+{{--                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="number" max="{{$howManyStocksCanBuy}}" min="1" step="1" placeholder="1" value="1" name="count">--}}
 
-{{--                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="number" min="1"  step="1" placeholder="1" value="1"  max="{{$howManystockscanBuy}}" name="count">--}}
+{{--                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="number" min="1"  step="1" placeholder="1" value="1"  max="{{$howManyStocksCanBuy}}" name="count">--}}
 
 {{--                                <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state" name="count">--}}
-{{--                                    @for($i=1; $i<=$howManystockscanBuy;$i++)--}}
+{{--                                    @for($i=1; $i<=$howManyStocksCanBuy;$i++)--}}
 {{--                                        <option value="{{$i}}">{{$i}}--}}
 
 {{--                                        </option>--}}

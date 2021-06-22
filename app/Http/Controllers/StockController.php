@@ -25,7 +25,7 @@ class StockController extends Controller
     public function buy($id)
         {
             $stock = Stock::findorfail($id);
-           return view('buystock',['stock'=>$stock, 'howManystockscanBuy'=> Auth::user()->howManystockscanBuy($id)]);
+           return view('buystock',['stock'=>$stock, 'howManyStocksCanBuy'=> Auth::user()->howManyStocksCanBuy($id)]);
         }
 
     public function confirmBuy(Request $request,$stock)
@@ -51,7 +51,7 @@ class StockController extends Controller
     {
         $stock = Stock::findorfail($id);
 
-        return view('sellstock',['stock'=>$stock, 'howManystockscanSell'=> Auth::user()->howManystockscanSell($id)]);
+        return view('sellstock',['stock'=>$stock, 'howManyStocksCanSell'=> Auth::user()->howManyStocksCanSell($id)]);
     }
 
 
@@ -69,7 +69,7 @@ class StockController extends Controller
 
 //Проценты вычитаем после продажи, так что их не проверяем
         //Если кол-во меньше, чем есть, то это ошибка
-        if(Auth::user()->howManystockscanSell($stock->id) < $count)
+        if(Auth::user()->howManyStocksCanSell($stock->id) < $count)
         {
             return back()->withErrors(['message'=>'У вас нет такого количества!']);
         }
