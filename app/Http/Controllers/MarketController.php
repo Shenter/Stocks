@@ -19,11 +19,16 @@ class MarketController extends Controller
             }
         foreach ($stocksChangebyDay as $key=>$value)
         {
-            $stocksChangebyDay[$key]['change'] =
-                StockHistory::whereDate('created_at',Carbon::today())->oldest()->first();
-        }
-        dd($stocksChangebyDay);
+            $latestPrice = Stock::findorfail($key);
 
+            $stocksChangebyDay[$key]['change'] =
+               round(
+                StockHistory::whereDate('created_at',Carbon::today())->where('stock_id','=',$key)->oldest()->first()->sum/
+                $latestPrice->getLatestPrice()
+            -1,3)*100;
+
+        }
+        dd ($stocksChangebyDay);
         return view('market',['stocks'=>$stocks]);
     }
 }

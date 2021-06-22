@@ -63,7 +63,7 @@ class User extends Authenticatable
     public function howManystockscanBuy($stockId)
     {
         $stock = Stock::find($stockId);
-        return floor($this->money/$stock->getLatestPrice());
+        return floor($this->money/$stock->getLatestPrice() *0.99 );
     }
     public function howManystockscanSell($stockId)
     {

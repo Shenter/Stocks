@@ -64,8 +64,9 @@ class StocksPrices implements ShouldQueue
            // $direction = rand(-8,9) < 0 ? '-':'+' ;
            $randomator = rand(0, 100);
             if($direction=='+') {
-                if ($randomator < 60)
+                if ($randomator < 60) {
                     $change = rand(10, 30);
+                }
                 if ($randomator >= 60 && $randomator < 80)
                     $change = rand(30, 40);
                 if ($randomator >= 80 && $randomator < 90)
@@ -80,8 +81,9 @@ class StocksPrices implements ShouldQueue
                     $change = -rand(10, 30);
                 if ($randomator >= 60 && $randomator < 80)
                     $change = -rand(30, 40);
-                if ($randomator >= 80 && $randomator <= 99 )
+                if ($randomator >= 80 && $randomator <= 99 ) {
                     $change = -40;
+                }
                 if ($randomator ==100 )
                     $change = -90;
             }
@@ -96,7 +98,7 @@ class StocksPrices implements ShouldQueue
                 'created_at'=>date('Y-m-d H:i:s'),
                 'updated_at'=>date('Y-m-d H:i:s'),
                 'stock_id'=>$stock->id,
-                'sum'=>$lastsum+$lastsum/100*($change)
+                'sum'=>$lastsum+$lastsum*($change)/100
                 ]);
 
             //с вероятностью 70% цена продолжит предыдущее движение вниз или вверх
@@ -116,5 +118,6 @@ class StocksPrices implements ShouldQueue
             //Надо добавить падение после дивидендов
             echo $direction;
         }
+        dispatch(new CalculateUsersCash());
     }
 }
