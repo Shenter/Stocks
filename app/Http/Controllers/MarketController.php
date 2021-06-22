@@ -28,7 +28,12 @@ class MarketController extends Controller
             -1,3)*100;
 
         }
-        dd ($stocksChangebyDay);
+        foreach ($stocks as $stock) {
+
+            $stock['stocksChangebyDay']=
+                $stocksChangebyDay[$stock->id] ['change'] ;
+        }
+
         return view('market',['stocks'=>$stocks]);
     }
 }

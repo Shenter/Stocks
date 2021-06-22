@@ -24,7 +24,17 @@
                        <tr>
                            <td><a href="{{route('stock.show',['stock'=>$stock['id']])}}">{{$stock['name']}}</a></td>
                            <td>-</td>
-                           <td>-</td>
+                           <td>
+                           @if($stock['stocksChangebyDay'] >0)
+                                   <font color="green">+{{$stock['stocksChangebyDay']}}</font>
+                               @else
+                               @if($stock['stocksChangebyDay'] <0)
+                                   <font color="red">{{$stock['stocksChangebyDay']}}</font>
+                               @else {{$stock['stocksChangebyDay']}}
+                                   @endif
+                                   @endif
+
+                           </td>
                            <td>
                                @if (Auth::user()->howManystockscanBuy($stock['id']))
                                    <a href="{{route('stock.buy', ['stock'=>$stock['id']])}}">

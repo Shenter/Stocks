@@ -63,9 +63,8 @@ class DataPreparer
                 $datesHistory = DB::table('users_cash')->where([
                     'user_id'=>Auth::user()->id])->latest()->get('created_at')->take(144);
                 $valuesHistory = DB::table('users_cash')->where(['user_id'=>Auth::user()->id])->latest()->get('sum')->take(144);
-
             }
-                break;
+            break;
         }
 
 
