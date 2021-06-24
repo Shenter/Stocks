@@ -29,7 +29,7 @@
                       <br>
                       Цена 1 - {{$stock->getLatestPrice()/100}}
                       <br>
-                      Комиссия за продажу - {{$stock::$TAX}}% ({{$stock::$TAX*$stock->getLatestPrice()/10000}} за 1 шт.)
+                      Комиссия за продажу - {{$stock::$TAX}}% ({{round($stock::$TAX*$stock->getLatestPrice()/10000,2)}} за 1 шт.)
                       <br>
                     <div class="flex flex-wrap -mx-3 mb-2">
                         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">

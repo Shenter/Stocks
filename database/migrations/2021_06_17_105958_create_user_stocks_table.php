@@ -13,13 +13,13 @@ class CreateUserStocksTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_stocks', function (Blueprint $table) {
+        Schema::create('stock_user', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->integer('stock_id');
             $table->integer('user_id');
             $table->integer('buy_price');
-            $table->boolean('is_active')->default(true);
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +30,6 @@ class CreateUserStocksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_stocks');
+        Schema::dropIfExists('stock_user');
     }
 }

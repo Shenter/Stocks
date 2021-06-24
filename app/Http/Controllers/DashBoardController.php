@@ -13,8 +13,6 @@ use Symfony\Component\VarDumper\Cloner\Data;
 class DashBoardController extends Controller
 
 {
-    //
-
     public function show()
     {
         $data = DataPreparer::prepareUserCash();

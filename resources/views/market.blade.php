@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <table width="60%">
+                    <table width="100%">
                         <thead>
                         <tr>
                             <td>Наименование</td>
@@ -22,15 +22,15 @@
 
                    @foreach($stocks as $stock)
                        <tr>
-                           <td><a href="{{route('stock.show',['stock'=>$stock['id']])}}">{{$stock['name']}}</a></td>
+                           <td><a href="{{route('stock.show',['stock'=>$stock['id']])}}"  class="underline  text-blue-600 hover:text-gray-900">{{$stock['name']}}</a></td>
                            <td>-</td>
                            <td>
-                           @if($stock['stocksChangebyDay'] >0)
-                                   <font color="green">+{{$stock['stocksChangebyDay']}}</font>
+                           @if($stock->getDailyChange() >0)
+                                   <font color="green">+{{$stock->getDailyChange()}}%</font>
                                @else
-                               @if($stock['stocksChangebyDay'] <0)
-                                   <font color="red">{{$stock['stocksChangebyDay']}}</font>
-                               @else {{$stock['stocksChangebyDay']}}
+                               @if($stock->getDailyChange() <0)
+                                   <font color="red">{{$stock->getDailyChange()}}%</font>
+                               @else {{$stock->getDailyChange()}}%
                                @endif
                            @endif
 

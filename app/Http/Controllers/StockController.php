@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TradeRequest;
 use Illuminate\Http\Request;
 use App\Models\Stock;
-use Illuminate\Support\Facades\DB;
 use App\Http\Classes\DataPreparer;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,22 +28,19 @@ class StockController extends Controller
            return view('buystock',['stock'=>$stock, 'howManyStocksCanBuy'=> Auth::user()->howManyStocksCanBuy($id)]);
         }
 
-    public function confirmBuy(Request $request,$stock)
+    public function confirmBuy(TradeRequest $request,$stock)
     {
-        //TODO Проверка данных на отрицательные и подобное
         $price = $request->price*100;
         $count = $request->count;
         //Если цена в реквесте ниже реальной цены, то это ошибка
         if($price < Stock::findorfail($stock)->getLatestPrice()) {
-            return back()->withErrors(['message'=> 'Указана цена ниже, чем готова купить биржа']);
+            return back()->withErrors(['message'=> 'Указана цена выше, чем цена биржи']);
         }
         //Если сумма реквеста +1% меньше его денег, то ошибка
         if($price*  (1+Stock::$TAX/100) * $count > Auth::user()->money  ){
-
             return back()->withInput()->withErrors(['message'=>'У вас недостаточно денег!']);
         }
         Auth::user()->buyStocks($stock, $count, $price);
-
         return redirect('stocks')->with(['messages'=>'Успешно куплено '.$count. ' шт. по цене '.$request->price]);
     }
 
@@ -55,7 +52,7 @@ class StockController extends Controller
     }
 
 
-    public function confirmSell(Request $request, Stock $stock)
+    public function confirmSell(TradeRequest $request, Stock $stock)
     {//TODO Проверка данных на отрицательные и подобное
         $price = $request->price*100;
         $count = $request->count;
@@ -77,8 +74,6 @@ class StockController extends Controller
         return redirect('stocks')->with(['messages'=>'Успешно продано '.$count. ' шт. по цене '.$request->price]);
 
     }
-
-
 
 
 }

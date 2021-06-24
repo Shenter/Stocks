@@ -47,19 +47,20 @@ class User extends Authenticatable
 
     public function stocks():\Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Stock::class)->wherePivot('is_active',1)->withPivot('buy_price');
+        return $this->belongsToMany(Stock::class)->wherePivot('deleted_at','=',null)->withPivot('buy_price');
     }
 
 
     public function howManyStocksCanBuy($stockId):int
     {
-        $stock = Stock::find($stockId);
+        $stock = Stock::findorfail($stockId);
         return floor($this->money/$stock->getLatestPrice() * 0.99 );
     }
+
+
     public function howManyStocksCanSell($stockId)
     {
-
-        return StockUser::where(['is_active'=>1, 'user_id'=>$this->id,'stock_id'=>$stockId])->get()->count();
+        return StockUser::where(['user_id'=>$this->id,'stock_id'=>$stockId])->get()->count();
     }
 
     /**
@@ -93,7 +94,8 @@ class User extends Authenticatable
         DB::table('admin_money')->update(['sum' => $adminMoney]);
         $this->money += $cost;
         $this->save();
-        StockUser::where(['is_active' => 1, 'user_id' => $this->id, 'stock_id' => $stock->id])->take($count)->update(['is_active' => false]);
+        StockUser::where([ 'user_id' => $this->id, 'stock_id' => $stock->id])->take($count)->delete();
+
     }
 
 }

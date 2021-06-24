@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\StockHistory;
+
 
 /**
  * Class Stock
@@ -16,6 +17,7 @@ class Stock extends Model
     use HasFactory;
     protected $table = 'stocks';
 
+
     protected $hidden = ['volatility'];
 
     public function getLatestPrice()
@@ -23,6 +25,22 @@ class Stock extends Model
         return StockHistory::where(['stock_id'=>$this->id])->latest()->first()->sum;
     }
 
+
+    public function getDailyChange()
+    {
+        return
+            round(
+                StockHistory::whereDate('created_at',Carbon::today())
+                    ->where('stock_id','=',$this->id)
+                    ->oldest()
+                    ->first()
+                    ->sum/
+                $this->getLatestPrice()
+                -1,3)*100;
+    }
+
+
+//    public function
 
 
 }

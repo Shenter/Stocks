@@ -9,9 +9,12 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                You're logged in!
+                Период:
+                <select name="period" >
+                    <option value="day" onclick="location.href='{{route('dashboard',['period'=>'day'])}}'" @if(request()->period=='day') selected @endif>День</option>
+                    <option value="month" onclick="location.href='{{route('dashboard',['period'=>'month'])}}'" @if(request()->period=='month') selected @endif>Месяц</option>
+                </select>
                 <div class="p-6 bg-white border-b border-gray-200">
-
                     <canvas id="myChart"></canvas>
                 </div>
             </div>
