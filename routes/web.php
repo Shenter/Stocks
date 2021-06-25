@@ -30,4 +30,4 @@ Route::middleware('auth')->post('/stock/{stock}/sell', 'App\Http\Controllers\Sto
 
 
 require __DIR__.'/auth.php';
-Route::get('/mln', 'App\Http\Controllers\TestController@mln');
+//Route::get('/mln', 'App\Http\Controllers\TestController@mln');
