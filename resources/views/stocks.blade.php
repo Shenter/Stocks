@@ -73,7 +73,7 @@
                                </a>
                            </td>
                     @empty
-                        <p>У вас пока нет акций. Самое время <a href="{{route('dashboard')}}" class="underline text-red-600 hover:text-gray-900">купить</a></p>
+                        <p>У вас пока нет акций. Самое время <a href="{{route('market.show')}}" class="underline text-red-600 hover:text-gray-900">купить</a></p>
                        </tr>
                     @endforelse
                         </tbody>

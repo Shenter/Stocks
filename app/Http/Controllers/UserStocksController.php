@@ -25,8 +25,6 @@ public function index()
             {
             $catalog[$key]['currentPrice'] =  StockHistory::where(['stock_id'=>$key])->latest()->first()->sum/100;
             $catalog[$key]['avgBuyPrice'] = StockUser::where(['stock_id'=>$key])->first()->getAvgBuyPrice($key);
-
-
             $catalog[$key]['count'] = $this->getCount($key);
             $catalog[$key]['name'] = Stock::where(['id'=>$key])->first()->name;
             $catalog[$key]['id'] = $key;
